@@ -14,9 +14,7 @@ function App() {
     dispatch(addToDo(text));
   };
 
-  useEffect(() => {
-    dispatch(getList());
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   const onChange = (e) => {
     setText(e.target.value);

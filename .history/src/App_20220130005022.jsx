@@ -6,8 +6,6 @@ function App() {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-
-  console.log(selector);
   const onSubmit = (e) => {
     e.preventDefault();
     setText("");

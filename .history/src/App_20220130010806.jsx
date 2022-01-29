@@ -6,8 +6,8 @@ function App() {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-
-  console.log(selector);
+  const items = useSelector((state) => state.extraReducers);
+  console.log(items);
   const onSubmit = (e) => {
     e.preventDefault();
     setText("");
@@ -15,7 +15,7 @@ function App() {
   };
 
   useEffect(() => {
-    dispatch(getList());
+    dispatch(getList);
   }, [dispatch]);
 
   const onChange = (e) => {

@@ -6,14 +6,14 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getList = createAsyncThunk("getList", async () => {
-  const response = await axios.get(
-    "https://codingapple1.github.io/shop/data2.json"
-  );
-  return response.data;
-});
-
 const initialState = [];
+
+const Items = createAsyncThunk("item/shoes", async (data, thunkAPI) => {
+  console.log(data);
+  await axios("https://codingapple1.github.io/shop/data2.json").then(
+    (res) => res
+  );
+});
 
 const toDoSlice = createSlice({
   name: "toDos",
@@ -26,7 +26,13 @@ const toDoSlice = createSlice({
       state.filter((todo) => todo.id !== action.payload),
   },
   extraReducers: {
-    [getList.fulfilled]: (state, { payload }) => [...payload],
+    [Items.pending](state, action) {
+      state.data = action.payload;
+    },
+    [Items.fulfilled](state, action) {
+      state.data = action.payload;
+    },
+    [Items.rejected](state, action) {},
   },
 });
 

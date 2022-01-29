@@ -6,11 +6,10 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getList = createAsyncThunk("getList", async () => {
+export const getList = createAsyncThunk("GET_ITEM", async () => {
   const response = await axios.get(
     "https://codingapple1.github.io/shop/data2.json"
   );
-  return response.data;
 });
 
 const initialState = [];
@@ -25,9 +24,7 @@ const toDoSlice = createSlice({
     deleteToDo: (state, action) =>
       state.filter((todo) => todo.id !== action.payload),
   },
-  extraReducers: {
-    [getList.fulfilled]: (state, { payload }) => [...payload],
-  },
+  extraReducers: () => {},
 });
 
 //const initialCountState = 0;

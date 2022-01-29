@@ -1,17 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  createAsyncThunk,
-  createSlice,
-} from "@reduxjs/toolkit";
-import axios from "axios";
-
-export const getList = createAsyncThunk("getList", async () => {
-  const response = await axios.get(
-    "https://codingapple1.github.io/shop/data2.json"
-  );
-  return response.data;
-});
+import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 
 const initialState = [];
 
@@ -26,15 +13,15 @@ const toDoSlice = createSlice({
       state.filter((todo) => todo.id !== action.payload),
   },
   extraReducers: {
-    [getList.fulfilled]: (state, { payload }) => [...payload],
+    getItems: {},
   },
 });
 
-//const initialCountState = 0;
 
-/* const countSlice = createSlice({
+
+const countSlice = createSlice({
   name: "count",
-  initialCountState,
+  initialState:0
   reducers: {
     increment: (state, action) => {
       return state + 1;
@@ -44,14 +31,14 @@ const toDoSlice = createSlice({
     },
   },
 });
- */
-/* const rootReducer = combineReducers({
+
+const rootReducer = combineReducers({
   toDos: toDoSlice.reducer,
   count: countSlice.reducer,
-}); */
+});
 
 export const store = configureStore({
-  reducer: toDoSlice.reducer,
+  reducer: rootReducer,
   devTools: process.env.NODE_ENV !== "production",
 });
 

@@ -6,13 +6,14 @@ function App() {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-
-  console.log(selector);
   const onSubmit = (e) => {
     e.preventDefault();
     setText("");
     dispatch(addToDo(text));
   };
+
+  const getItems = useSelector((state) => state.getList);
+  console.log(getItems);
 
   useEffect(() => {
     dispatch(getList());
