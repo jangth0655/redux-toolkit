@@ -1,13 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Item from "./Item";
 import { itemsList } from "./reducer/items";
 import { action, addToDo, deleteToDo } from "./reducer/todo";
 
 function App() {
   const [text, setText] = useState("");
   const items = useSelector((state) => state.items.data);
-  const value = useSelector((state) => state.toDos.value);
+  const { value } = useSelector((state) => state.toDos);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -49,7 +48,6 @@ function App() {
           <button>DEL</button>
         </div>
       ))}
-      <Item />
     </>
   );
 }

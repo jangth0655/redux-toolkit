@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Item from "./Item";
 import { itemsList } from "./reducer/items";
 import { action, addToDo, deleteToDo } from "./reducer/todo";
 
@@ -49,7 +48,6 @@ function App() {
           <button>DEL</button>
         </div>
       ))}
-      <Item />
     </>
   );
 }
