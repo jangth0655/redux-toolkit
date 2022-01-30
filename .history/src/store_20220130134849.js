@@ -1,0 +1,50 @@
+import {
+  configureStore,
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const getList = createAsyncThunk(
+  "toDos/data",
+  async (data, thunkAPI) => {
+    const response = await axios.get(
+      "https://codingapple1.github.io/shop/data2.json"
+    );
+    return response.data;
+  }
+);
+
+const initialState = {
+  todo: [],
+  data: [],
+};
+
+const toDoSlice = createSlice({
+  name: "toDos",
+  initialState,
+  reducers: {
+    addToDo: (state, action) => {
+      state.todo.push({ text: action.payload, id: Date.now() });
+    },
+    deleteToDo: (state, action) =>
+      state.todo.filter((todo) => todo.id !== action.payload),
+  },
+  extraReducers: (builder) => {
+    console.log("builder", builder);
+    builder.addCase(getList.fulfilled, (state, action) => {
+      state.data.push(action.payload);
+    });
+  },
+});
+
+export const store = configureStore({
+  // eslint-disable-next-line no-undef
+  reducer,
+  devTools: process.env.NODE_ENV !== "production",
+});
+
+export const { addToDo, deleteToDo } = toDoSlice.actions;
+
+console.log("action/type", addToDo());
+console.log("actionCreator", toDoSlice.actions);
